@@ -1,0 +1,435 @@
+1-data saved in redis face STRING
+2-nil in redis meaning nothing
+
+
+---redis-server---
+sudo service redis-server stop
+sudo service redis-server start
+
+
+
+---for system local connect---
+redis-cli 
+
+
+---for connect to server---
+redis-cli -h <ip> -p <port>6379
+
+
+---set ---<OK>
+SET key value [expiration EX secounds|px millisecound] [NX|XX]
+SET num 123
+SET num1 23 EX 40
+
+
+---get---<string>
+GET key
+
+
+--del--- <int> delete
+DEL key [key ...]
+
+
+---exist--- 1.0 , <int> for exist
+EXISTS key [key ...]
+
+
+---expire---<1> ,this time for live, EXPIREAT this time for live computering
+EXPIRE key secound
+EXPIRE nu 40
+
+
+---persist---<1> , canceling expire
+PERSIST key
+
+
+---ttl--- <int>, -2 delete, -1 not match, time to live
+TTL key
+
+
+---keys--- <keys> ,patternss * all, ? one 
+KEYS patterns
+KEYS ?num*
+KEYS * ---show all keys---
+
+
+
+---Randomkey---<null,key>
+RANDOMKEY
+
+
+---rename---<ok>
+RENAME key newkey
+
+
+-----------------------------------STRING-------------------------
+
+
+---append---<int>, sum character
+APPEND key value
+
+---decr---<-int>
+DECR key
+
+---decrby---<-iny>
+DECRBY key decrement
+
+---incr---<+int>
+INCR key
+
+---incrby---<+int>
+INCRBY key increment
+
+---incrbyflloat---
+INCRBYFLOAT key increment
+
+---getrange---
+GETRANGE key start end
+GETRANGE num 0 4
+
+---getset--- set new value and show old value
+GETSET key value
+
+---mget---
+MGET key [key ...]
+
+---mset---
+MSET key value [key value ...]
+
+---msetnx--- multi set if not exists
+MSETNX key value [key value ...] 
+---psetex--- 
+PSETX key millisecound value
+
+---setrange---
+SETRANGE key offset value
+
+
+--------------------------------LIST-------------------------------
+
+
+---lpush---left set list value
+LPUSH key value [value ...]
+
+---rpush---rigth set list value
+RPUSH key value [value ...]
+
+---lrange---show l,rpush
+LRANGE key start stop
+
+---lpushx , rpushx---push if exists
+LPUHS key elements [elements ...]
+
+---lindex--- index to element
+LINDEX key index
+
+---lpos--- element to index
+LPOS key element 
+
+---linsert---
+LINSERT key before|after pivot value
+
+---llen---<int>
+LLEN key
+
+---lpop, rpop-- delete first element of rigth/left
+LPOP key
+
+---lrem--- delete range of elements Repetitious
+LREM key count value
+
+---lset--- rename index
+LSET key index value
+
+---ltrim--- delete foreign range
+LTRIM key start stop
+
+--rpoplpush---move element
+RPOPLPUSH source destination
+
+---blpop--- remove element if list None, waiting to insert
+BLPOP key [key ...] timeout
+
+
+--------------------------------------hash----------------------
+in key(hash) , again key(field) into
+
+---hset---<int> number field
+HSET key field value 
+HSET user1 name joe age 28 height 180
+
+---hget---
+HGET key field
+HGETALL key
+
+---hmget---
+HMGET key field [field ...]
+
+---hdel--- delete field
+HDEL key field
+
+---hexists---
+HEXISTS key field
+
+---hincr---<int> for value integer
+HINCR key key field increment(-,+)
+
+---hkeys--- fields
+HKEYS key
+
+---hvals--- values
+HVALS key
+
+---hlen--- <int>
+HLEN key
+
+---hsetnx--- set if not exist 
+HSETNX key field value
+
+---hset---0, overide
+HSET key field value
+
+---hstrlen---<int> , number len value
+HSTRLEN key field
+
+-------------------------------SETS-----------------------------
+out of sorts , no repetition
+
+---sadd---<int>number member, create
+SADD key member [member ...]
+
+---smembers--- writing
+SMEMBERS key
+
+---del---
+DEL key
+
+---scard---<int> number members
+SCDARD key
+
+---sismeber---o,1 , member exists
+SISMEMBER key member
+
+---spop--- random delete
+SPOP key [count]
+
+---sranmember--- random return of in out range,(if - repeate,if + complete) 
+SRANMEMBER key [count] of out range if - repeate 
+
+---sdiff--- differents between set1 of others
+SDIFF key [key ...]
+
+---sinter---supscripe between set
+SINTER key [key ...]
+
+---sunion--- community between set
+Sunion key [key ...]
+
+---sdiffstore--- community between set into newset
+SDIFFSTORE destination key [key ...]
+
+---smove--- move member into other set
+SMOVE source destinations member
+
+
+---------------------------------SORTED SETS ----------------------
+
+---zadd---<int> number create
+ZADD key [NX|XX] [CH] [INCR] score member [score member ...]
+ZADD class 12 joe 13 john 14 jack 18 peny 34 richell 
+
+---zrange---
+ZRANGE key start stop [WITHSCORE]
+
+---zcard---<int>, number element
+ZCARD key
+
+---zcount---<int> count 
+ZCOUNT key min max
+ZCOUNT class 11 18
+
+---zincrby---
+ZINCRBY key increment member
+ZINCRBY class 3 joe
+
+ZDIFF
+DIFFSTORE
+
+---zpopmax---delete max
+ZPOPMAX key [count]
+zpopmin key [count]
+
+---zrem--- remove members
+ZREM key member [member]
+
+---zscore---
+ZSCORE key member
+
+---zrevrange---
+ZREVRANGE key start stop [WITHSCORES]
+
+---------------------------HYPERLOGLOG--------------------------
+for number and  counting data and mergin dont repeat
+
+---pfadd---
+PFADD key elemet [element ...]
+
+---pfcount---<int>
+PFCOUNT key [key ...]
+
+---pfmerge---OK
+PFMERGE destkey sourcekey [sourcekey ...]
+
+--------------------------------PUB/SUB----------------------------
+publish and subscriber
+
+---publish--- create channel and sendig message one 
+PUBLISH channel message
+
+---subscribe---connect to channel
+SUBSCRIBE channel [channel ...]
+
+---unsubscribe--- dont connect to channel
+unsubscribe [channel [channel ...]]
+
+---psubscribe---
+PSUBSCRIBE patterns [patterns]
+PSUBSCRIBE o?e
+
+PUNSUBSCRIBE
+
+---pubsub---
+PUBSUB subcommand [argument [argument ...]]
+pubsub channels
+
+--------------------------------TRANSACTIONS-----------------------
+مجموعه دستورات پشت سرهم برای اجرا بصورت ایزوله و مطمین
+transaction=تراکنش
+
+MULTI
+
+set name joe >>>QUEUED
+set age 30   >>>QUEUED
+set height 2 >>>QUEUED
+DEL height   >>>QUEUED
+
+
+EXEC
+
+DISCARD >>>cancle transactions
+
+WATCH
+UNWATCH
+--------------------------------PIPLINE----------------------------
+برای استفاده از قدرت پردازش بالای ردیس دستورات رو به قالب یک بسته ارسال میکنیم
+اتصال به ردیس nc localhost 6379
+به معنای اینتر زدن است r\n\
+
+(printf "PING\r\nSET name amir\r\nGET name\r\n";) | nc localhost 6379
+
+-------------------------------PERSISTANCE-------------------------
+
+CONFIG GET dir >>>path for success of backup
+
+SAVE  >>>for backup
+
+BGSAVE >>for backup in backend
+
+cp /var/lib/redis/dump.rdb /home/joe/Desktop >>for copy file backup
+
+CONFIG GET save >>>for show setting time backup(rdb)
+
+CONFIG GET appendonly >>> for show setting backup(aof) default is no 
+CONFIG GET appendfsync >>>(time backupaof)
+
+--- for test spead DB ---
+redis-benchmark [-h <host>] [-p <port>] [-c <clients>] [-n <requests>] [-k <boolean>]
+redis-benchmark -n 30000 -t rpop,rpush
+
+----------------------------------SERVER---------------------------
+---slect--- change database default select between 0,16 database
+SELECT index
+SELECT 3 
+
+---swapdb--- move data of db to other db
+SWAPDB index index
+SWAPDB 0 3
+
+---flushdb---delete data on DB active
+FLUSHDB
+FLUSHALL >>>delete all data in all 16 DBs
+
+
+DBSIZE >>> number oof keys
+
+INFO >>> information of DB
+
+LASTSAVE >>>last save time
+
+MONITOR >>> show all changing in time 
+
+CLIENT LIST >>> information of user to connect in redisDB
+
+-----------------------------------PYTHON--------------------------
+pip install redis
+
+import redis
+redis_host = 'localhost'
+redis_port = 6379
+redis_pass = ''
+redis_db = 3
+
+rd = redis.Redis(host=redis_host,port=redis_port, password=redis_pass, db=redis_db)
+
+rd.set('name', 'amir')
+rd.set('age', 10)
+rd.set('email', 'joe@gamil.com')
+
+print(rd.get('name'))
+print(rd.get('age'))
+print(rd.get('email'))
+
+print(rd.client_list()) 
+
+--------------------------PYTHON PIPLINE---------------------------
+
+import redis
+import json 
+
+redis_host = 'localhost'
+redis_port = 6379
+redis_pass = ''
+redis_db = 3
+
+rd = redis.Redis(host=redis_host,port=redis_port, password=redis_pass, db=redis_db)
+
+with open('person.json') as p:
+	data = json.load(p)
+	
+
+with rd.pipline(data, start=1) as pipe:
+	for id, person in enumerate(data):
+		pipe.hsetnx('persons', id, str(person))
+	pipe.execute()
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+

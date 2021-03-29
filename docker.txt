@@ -1,0 +1,202 @@
+
+---for show all commends and management---
+docker
+
+---help---
+docker [commend] --help
+
+
+-----------------------------------IMAGE-----------------------------
+
+---download image---
+docker pull [image name]
+
+----show list----
+docker image ls
+docker images
+
+----remove---
+docker rmi [image name/id]
+
+docker rmi $(docker images -q --filter "dangling=true") >>>remove all image for catch
+
+
+
+---------------------------------CONTAINER---------------------------
+
+docker container --help
+
+----show list----
+docker ps -a
+docker container ls
+
+----create container----
+docker run [image name/id]
+docker run --name [name] [image name/id]
+docker run --rm [image name/id] [commends] >>>execute and run commend and remove
+docker run -it --rm [image name/id] >>>intractive, allow to pseucode
+
+
+----remove----
+docker rm [container_name/id]
+docker container prune >>> remove all containers the is stoping
+
+----run of background(detatch)----
+docker run -d [image name]
+docker create -it --name [name] [image name/id]
+
+docker stop [container name/id]
+docker start [container name/id]
+docker restart [container name/id]
+docker kill [container name/id]
+
+docker pause [container name/id]
+docker unpause [container name/id]
+
+docker exec -it [container name/id] [commend]
+
+-p [ip]:[port_container]:[port_server] >>> connect port and ip with container
+
+
+-----------------------------------CONNECT FOR PUSH IMAGE-----------------
+
+docker login
+docker tag [image name/id] [username]/[change_tag]
+docker push [username]/[tag name]
+
+-------------------------------LOAD/SAVE-----------------------------
+
+docker save -o [name].tar [image name/id]
+
+docker load -i [name].tar
+
+-----------------------------------VOLUME--------------------------
+
+---path for volume in linux--
+/var/lib/docker/volumes/
+
+---create volume---
+docker volume create [name]
+
+---show list---
+docker volume ls
+
+---information about volume---
+docker volume inspect [volume name]
+
+---remove volume---
+docker volume rm [volume name]
+
+---connect container to  volume---
+-v [volume name]:[name WORKDIR]
+docker run -d --name [name] -v [volume name]:[name WORKDIR] [image name]
+
+--mount source=[volume name],target=[name WORKDIR]
+
+docker run -d --name [name] --mount source=[volume name],target=[name WORKDIR] [image name]
+
+
+---sharing volume with other containers---
+docker run -itd --name [name] --volumes-from [volume name]:[access] [image name] >>>access default iis rw you can change to ro , ...
+
+-------------------------------------NETWORK------------------------
+
+docker network --help
+
+docker network ls
+docker network create [name]
+docker network connect [network name] [container name/id]
+docker network disconnect 
+docker network inspect [network name]
+docker network rm [network name]
+docker network prune 
+
+
+
+---------------------------------------DOCKERFILE--------------------
+
+FROM [image]:latest
+
+MAINTAINER 'information about making'
+
+#this is comments
+
+WOKDIR /[name]
+
+COPY [we_file] .
+
+COPY requirements.txt
+
+RUN pip install -u pip && pip install -r requirements.txt
+
+EXPOSE [port]/[protocol]
+
+CMD python ./[we_file.py]
+
+----end---
+docker build -t [name]:[version] .
+docker run [image]
+
+----------------------------------DOCKERCOMPOSE---------------------
+
+----version---
+docker-compose --version
+
+
+---show list---
+dcoker-compose ps -a
+ 
+----dockercompose.yml----
+version: '3.8'
+
+services:
+  one:
+    buuild: .
+       
+  bx:
+    image: busybox
+
+
+
+dockercompose up
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
