@@ -1,0 +1,50 @@
+git help ....				--->show doc help
+git config --global user.name "..."	--->set username for git
+git config --global user.email "..."	--->set email for git
+git config --list			--->show config 
+
+
+git init               --->start git
+git status             --->show condition git
+git add ./...          --->add change to stage
+git commit -m "...."   --->commit stage
+
+
+git log                --->show logs commits
+git log --oneline      
+git log --graph 
+git log --stat
+
+
+git branch ...      		  --->create branche 
+git branch            		  --->show list of all branch
+git branch -d  ...    		  --->delete branch if changes merged to master
+git branch -D ...                --->delete branch anywhere 
+git branch -m old_name new_name  --->change name branch
+git checkout -b ....             
+
+ 
+git merge branch_name                       --->merge branch to master first go to branche master
+git merge --abort
+git checkout id_commit/branch_name beetwen  --->move/switch into branche(active branch) or back to commit
+git revert id_commit                        ---> delete effects commit this command not delete commit
+
+
+
+git reset id_commit --soft     --->delete commit
+git reset id_commit --mixed    --->delete commit and stage
+git reset id_commit --hard     --->delete file and directory
+
+
+git push git_link branch_name    --->sending project to repository github
+git pull git_link branch_name    --->received project complete of github
+git fetch git_link               ---> received changes project than project exists
+
+git remote add link_name    --->set url for origin
+git remote -v               ---> show url for pull and push
+
+git clone git_link
+
+git remote set_url url_new_github_for_change --->change url remote origin
+
+rm -rf .git ---> remove git

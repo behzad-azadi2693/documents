@@ -4,11 +4,15 @@
 
 ---redis-server---
 sudo service redis-server stop
-sudo service redis-server start
-sudo service redis-server stop
-redis-server
+sudo service redis-server status
 
+sudo service redis-server start --->ative server in backend
+redis-server --->active server redis
 
+redis-cli ping --->cheking for connect redis
+
+ps aux | grep redis ---> for show id active
+kill -9 id ---> for kill id active
 
 
 ---for system local connect---
