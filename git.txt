@@ -45,6 +45,7 @@ git remote -v               ---> show url for pull and push
 
 git clone git_link
 
+git remote rm origin   --->delete remote
 git remote set_url url_new_github_for_change --->change url remote origin
 
 rm -rf .git ---> remove git
