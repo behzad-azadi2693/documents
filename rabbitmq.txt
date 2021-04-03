@@ -1,0 +1,74 @@
+---install---
+sudo apt-get install erlang
+erl 			---> go to the cmd erlang
+
+sudo apt-get install rabbitmq
+
+rabbitmq + double Tab 	--->sow four tools
+
+
+sudo service rabbitmq-server start
+sudo service rabbitmq-server stop
+sudo service rabbitmq-server restart
+sudo service rabbitmq-server status
+
+------------------------------------description-----------------------
+
+
+rabbitmq is a brocker that uses default of protocol in the name of AMQP
+
+
+producer =
+ارسال کننده یک درخواست برای انجام کاری
+consumer =
+دریافت کننده درخواست و پاسخ دهنده به آن
+brocker =
+ارتباط دهنده بین ارسال کننده و دریافت کننده که ترتیب برقراری این ارتباط و چگونگی
+ آنرا می دهد
+exchange = 
+تصمیم گیرنده چگونگی توزیع درخواست ها بین صف های درون بروکر را می دهد
+binding = 
+به ارتباط بین تصمیم گیرنده و صف ها میگویند
+queue =
+صف های موجود در بروکر که درخواست ها به ترتیب خاصی درون آنها برای پردازش قرار
+می گیرد
+routes = 
+به ارسال از تصمیم گیرنده به صف
+
+
+rabbitmq including = exchange,binding,queue,routes
+
+
+types of exchange=
+	direct  ---> send diredtive
+	fanout  --->send to all
+	topic   --->based on patterns or regularition
+	headers --->based on keys and values and x-match== any or all
+
+
+rabbitmq-server = سرور و هسته اصلی برنامه
+rabbitmq-plugins = مدیریت پلاگین ها
+rabitmqctl = مدیریت کانکشن ها و نودها و کانالها	
+rabbitmqadmin = کارکردن با ادمین
+
+
+---rabbitmq-plugins---
+sudo rabbitmq-plugins list
+rabbitmq-plugins enable [plugin name]
+rabbitmq-plugins disable [plugin name]
+
+sudo rabbitmq-plugins enable rabbitmq_management 
+--->go to localhost:15672  username and password = guest
+
+
+---rabbitmqctl---
+sudo rabbitmqctl list_queues
+sudo rabbitmqctl add_user [username] [password]
+sudo rabbitmqctl list_users
+sudo rabbitmqctl set_user_tags [username] administrator
+sudo rabbitmqctl delete_user [username]
+sudo rabbitmqctl list_exchange
+
+
+---rabbitmqadmin---
+sudo rabbitmqadmin  delete queue name=first
