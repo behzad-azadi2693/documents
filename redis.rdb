@@ -10,7 +10,7 @@ sudo service redis-server start --->ative server in backend
 redis-server --->active server redis
 
 redis-cli ping --->cheking for connect redis
-
+redis-cli -n 1 --->connect to db(1)
 ps aux | grep redis ---> for show id active
 kill -9 id ---> for kill id active
 
