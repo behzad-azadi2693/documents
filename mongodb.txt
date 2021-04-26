@@ -56,65 +56,7 @@ db.users.find().limit(2)
 db.users.agrregate(
    {$match:{name:'joe'}},
    {$group:{_id:'_name',
-    total:{$sum:'$priceuse db_name
-
-show dbs
-
-db.dropDatabase()
-
-db.createCollection("users")
-
-db.users.count()
-
-db.users.remove({})
-
-db.users.drop()
-
-show collections
-------------------------------------------
-db.users.insertOne({name:"joe"},...)
-
-db.users.insertMany([{...},{...}])
-
-db.users.insert([{...},{...},])
----------------------------------------------
-db.users.find()
-
-db.users.findOne({name:'joe'})
-
-db.users.find({name:{$in { ['joe', 'john']}, .... })
-
-db.users.find({$or:[{name:{$in { ['joe', 'john']}, {age:{$gt:20}} ]})
--------------------------------------------------
-db.users.updateOne({name:'joe'}, {$set:{age:10}})
-
-db.users.updateOne({name:'joe'}, {$set:{age:10},{upsert:true}})
-
-db.users.updateOne({name:'joe'}, {$set:{'contact.phone':1234566, 'contact.email': 'ggfg@gmsil.com' },{upsert:true}})
-
-
-db.users.updateMany....
-
--------------------------------------------------
-db.users.deleteOne({name:'joe'})
-
-db.users.deleteMany...
--------------------------------------------------
-touch f_name.js
-then writing commonds mongodb in file 
-
-use db_name
-
-load('path/f_name.js')
-------------------------------------------
-db.users.distinict('name')
-
-db.users.find().limit(2)
-------------------------------------------
-db.users.agrregate(
-   {$match:{name:'joe'}},
-   {$group:{_id:'_name',
-    total:{$sum:'$price'}}}
+    total:{$sum:'$priceuse db_name}}}
 )
 
 db.users.aggregate({$project:{name:1,age:1}})
