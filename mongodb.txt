@@ -75,23 +75,4 @@ go to the one path:
 mongodump
 mongodump -d db_name
 
-mongorestore'}}}
-)
-
-db.users.aggregate({$project:{name:1,age:1}})
-
-db.users.aggregate({$sorte:{price:-1}}, {$limit:3})
-------------------------------------------
-for(i=0;i<3000;i++){
-user_id:i,name:'joe'}
-
-db.users.createIndex({user_id:1})
-
-db.users.dropIndex({user_id:1})
--------------------------------------------
-go to the one path:
-
-mongodump
-mongodump -d db_name
-
 mongorestore
