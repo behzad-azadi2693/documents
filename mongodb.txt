@@ -72,7 +72,6 @@ db.users.createIndex({user_id:1})
 
 db.users.dropIndex({user_id:1})
 -------------------------------------------
-use <my_db>
 db.createUser(
    {
      user: "myusername",
