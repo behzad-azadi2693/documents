@@ -1,5 +1,7 @@
 use db_name
 
+db.roles()
+
 show dbs
 
 db.dropDatabase()
@@ -70,6 +72,22 @@ db.users.createIndex({user_id:1})
 
 db.users.dropIndex({user_id:1})
 -------------------------------------------
+use <my_db>
+db.createUser(
+   {
+     user: "myusername",
+     pwd: passwordPrompt(),  // Or  "<cleartext password>"
+     roles: [ "readWrite", "dbAdmin" ],
+     passwordDigestor:"server"
+   }
+)
+
+db.ChangeUserPassword('new_password', 'db_name')
+
+db.auth('usernamr','pwd')
+
+show users
+------------------------------------------
 go to the one path:
 
 mongodump
