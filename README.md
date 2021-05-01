@@ -11,4 +11,6 @@ redis
 postgres
 
 docker
+
+git
 ```
