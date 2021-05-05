@@ -34,7 +34,7 @@ docker rmi $(docker images -q --filter "dangling=true") >>>remove all image for 
 docker container --help
 
 ----show list----
-docker ps -a
+docker ps -a       ---->(-l , -n 4, -q , -f {{size .}} , --format {{.NAMES}} this id:{{.ID}})
 docker container ls
 
 ----create container----
@@ -166,44 +166,4 @@ services:
 
 
 dockercompose up
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
