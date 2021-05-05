@@ -17,6 +17,7 @@ docker [commend] --help
 
 ---download image---
 docker pull [image name]
+docker commit -p -c ["add_options<EXPOSE 8888>"] [container_name] [name_for_new_image] >>>create image of container
 
 ----show list----
 docker image ls
@@ -24,9 +25,15 @@ docker images
 
 ----remove---
 docker rmi [image name/id]
-
 docker rmi $(docker images -q --filter "dangling=true") >>>remove all image for catch
 
+---search---
+docker search [image_name] 
+docker search --limit 10 --filter "is-official=true" [image_name] 
+
+---other---
+docker tag [national_image:tag] [name_new_image:tag]  >>> create image dont copy(liking link in linux)
+docker inspect [image_name]
 
 
 ---------------------------------CONTAINER---------------------------
@@ -34,7 +41,7 @@ docker rmi $(docker images -q --filter "dangling=true") >>>remove all image for 
 docker container --help
 
 ----show list----
-docker ps -a       ---->(-l , -n 4, -q , -f {{size .}} , --format "{{.NAMES}} this id:{{.ID}}")
+docker ps -a       >>>(-l , -n 4, -q , -f {{size .}} , --format "{{.NAMES}} this id:{{.ID}}")
 docker container ls
 
 ----create container----
@@ -42,10 +49,14 @@ docker run [image name/id]
 docker run --name [name] [image name/id]
 docker run --rm [image name/id] [commends] >>>execute and run commend and remove
 docker run -it --rm [image name/id] >>>intractive, allow to pseucode
+docker run -it -d --name=[name_container:tag] -p [ip_out:port_out:port_in] --hostname=[hostname_container] -e [variable=value] -w [/paht] 
+           -v [/path_your_store]/data:[/path_store_image] [image]
+docker rename old_name_container new_name
 
 
 ----remove----
-docker rm [container_name/id]
+docker rm [container_name/id] 
+docker rm -f [container_name/id] 
 docker container prune >>> remove all containers the is stoping
 
 ----run of background(detatch)----
@@ -141,7 +152,9 @@ EXPOSE [port]/[protocol]
 CMD python ./[we_file.py]
 
 ----end---
-docker build -t [name]:[version] .
+docker build -t [name]:[version] . 
+docker build -f [paht_Dockerfile] -t [name]:[version] 
+
 docker run [image]
 
 ----------------------------------DOCKERCOMPOSE---------------------
@@ -158,7 +171,7 @@ version: '3.8'
 
 services:
   one:
-    buuild: .
+    build: .
        
   bx:
     image: busybox
