@@ -3,7 +3,8 @@ sudo systemctl stop docker
 sudo systemctl start docker
 sudo systemctl restart docker
 
-
+docker version
+docekr info
 
 ---for show all commends and management---
 docker
