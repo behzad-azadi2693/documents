@@ -6,6 +6,9 @@ sudo systemctl restart docker
 docker version
 docekr info
 
+docekr events --since '10m'  >>> show What happened ten minutes ago
+docekr events --since '10m' --format '{{json .}}'  
+
 ---for show all commends and management---
 docker
 
@@ -17,7 +20,6 @@ docker [commend] --help
 
 ---download image---
 docker pull [image name]
-docker commit -p -c ["add_options<EXPOSE 8888>"] [container_name] [name_for_new_image] >>>create image of container
 
 ----show list----
 docker image ls
@@ -34,6 +36,11 @@ docker search --limit 10 --filter "is-official=true" [image_name]
 ---other---
 docker tag [national_image:tag] [name_new_image:tag]  >>> create image dont copy(liking link in linux)
 docker inspect [image_name]
+
+docker commit -p -c ["add_options<EXPOSE 8888>"] [container_name] [name_for_new_image] >>>create image of container
+ 
+docker export [container_name] > [path/container_name].tar  >>> save container in a path system and convert to image without history
+docker import [path/container_name].tar [name:tag]
 
 
 ---------------------------------CONTAINER---------------------------
@@ -66,14 +73,16 @@ docker create -it --name [name] [image name/id]
 docker stop [container name/id]
 docker start [container name/id]
 docker restart [container name/id]
-docker kill [container name/id]
+docker kill [container name/id] 
+docker kill -s [number signal] [container name/id] 
+kill -l  >>>show list of signall
 
 docker pause [container name/id]
 docker unpause [container name/id]
 
 docker exec -it [container name/id] [commend]
 
--p [ip]:[port_container]:[port_server] >>> connect port and ip with container
+-p [ip]:[port_out]:[port_in] >>> connect port and ip with container
 
 
 -----------------------------------CONNECT FOR PUSH IMAGE-----------------
@@ -82,13 +91,14 @@ docker login
 docker tag [image name/id] [username]/[change_tag]
 docker push [username]/[tag name]
 
--------------------------------LOAD/SAVE-----------------------------
+-------------------------------LOAD/SAVE----------------------------------
 
-docker save -o [name].tar [image name/id]
+docker save -o [path/name].tar [image name/id]                       >>> save images in a path with hostory
+docker save -o [path/name].tar [image name/id] [image name/id]  
 
 docker load -i [name].tar
 
------------------------------------VOLUME--------------------------
+-----------------------------------VOLUME--------------------------------
 
 ---path for volume in linux--
 /var/lib/docker/volumes/
