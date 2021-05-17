@@ -42,6 +42,8 @@ docker commit -p -c ["add_options<EXPOSE 8888>"] [container_name] [name_for_new_
 docker export [container_name] > [path/container_name].tar  >>> save container in a path system and convert to image without history
 docker import [path/container_name].tar [name:tag]
 
+docker history [image]
+
 
 ---------------------------------CONTAINER---------------------------
 
@@ -80,16 +82,27 @@ kill -l  >>>show list of signall
 docker pause [container name/id]
 docker unpause [container name/id]
 
+docker port [container name/id]
+
 docker exec -it [container name/id] [commend]
 
--p [ip]:[port_out]:[port_in] >>> connect port and ip with container
+docker logs [container]
+docker logs -f [container]   >>>show in line to line
 
+docker diff [container]
+
+-p [ip]:[port_out]:[port_in]  >>> connect port and ip with container
+-m 100M   >>>memory stage
+
+docker update -m 150M [container]  >>change limit memory
 
 -----------------------------------CONNECT FOR PUSH IMAGE-----------------
 
-docker login
-docker tag [image name/id] [username]/[change_tag]
-docker push [username]/[tag name]
+docker login docker.[name_ripository]
+docker logout
+cat .docker/config.json    >>>show information for connect to repository
+docker tag [image name/id] [address_ripository]/[name:tag]
+docker push [username]/[tag name] or (image create in above)
 
 -------------------------------LOAD/SAVE----------------------------------
 
@@ -161,7 +174,7 @@ EXPOSE [port]/[protocol]
 
 CMD python ./[we_file.py]
 
-----end---
+----end----
 docker build -t [name]:[version] . 
 docker build -f [paht_Dockerfile] -t [name]:[version] 
 
