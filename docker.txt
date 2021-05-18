@@ -93,6 +93,7 @@ docker diff [container]
 
 -p [ip]:[port_out]:[port_in]  >>> connect port and ip with container
 -m 100M   >>>memory stage
+--dns [ip] --dns [ip] 
 
 docker update -m 150M [container]  >>change limit memory
 
