@@ -17,15 +17,22 @@ git log --stat
 
 
 git branch ...      		           ---> create branche 
+git checkout branche_name        ---> swiych to branche
 git branch            		         ---> show list of all branch
+git diff branche1..branche2      --->difference beetwean tow branche
 git branch -d  ...    		         ---> delete branch if changes merged to master
 git branch -D ...                ---> delete branch anywhere 
 git branch -m old_name new_name  ---> change name branch
-git checkout -b ....             
+git checkout -b ....             ---> create branche and move to this branche
 git commit -am 'description'     ---> add to commit direct
 git commit --amend -m            ---> mergin this commit to last commit with together
 
-
+git stash
+git stash save 'message'         ---> save without effect
+git stash list                   ---> show all stash
+git stash apply stash_name       ---> apply stash int project
+git stash drop stash_name        ---> delete stash
+git stash pop stahs_name         ---> apply and remive stash
  
 git merge branch_name            ---> merge branch to master first go to branche master
 git merge --abort
