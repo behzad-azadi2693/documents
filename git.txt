@@ -1,51 +1,64 @@
 git help ....				--->show doc help
-git config --global user.name "..."	--->set username for git
-git config --global user.email "..."	--->set email for git
+git config --global user.name "..."	   --->set username for git
+git config --global user.email "..."  	--->set email for git
 git config --list			--->show config 
 
 
-git init               --->start git
-git status             --->show condition git
-git add ./...          --->add change to stage
-git commit -m "...."   --->commit stage
+git init                         ---> start git
+git status                       ---> show condition git
+git add ./...                    ---> add change to stage
+git commit -m "...."             ---> commit stage
 
 
-git log                --->show logs commits
+git log                          ---> show logs commits
 git log --oneline      
 git log --graph 
 git log --stat
 
 
-git branch ...      		  --->create branche 
-git branch            		  --->show list of all branch
-git branch -d  ...    		  --->delete branch if changes merged to master
-git branch -D ...                --->delete branch anywhere 
-git branch -m old_name new_name  --->change name branch
+git branch ...      		           ---> create branche 
+git branch            		         ---> show list of all branch
+git branch -d  ...    		         ---> delete branch if changes merged to master
+git branch -D ...                ---> delete branch anywhere 
+git branch -m old_name new_name  ---> change name branch
 git checkout -b ....             
+git commit -am 'description'     ---> add to commit direct
+git commit --amend -m            ---> mergin this commit to last commit with together
+
 
  
-git merge branch_name                       --->merge branch to master first go to branche master
+git merge branch_name            ---> merge branch to master first go to branche master
 git merge --abort
-git checkout id_commit/branch_name beetwen  --->move/switch into branche(active branch) or back to commit
-git revert id_commit                        ---> delete effects commit this command not delete commit
 
 
+git diff                         ---> what changed in last commit
+git diff staged                  ---> what changed beetwean file into stage and commit
 
-git reset id_commit --soft     --->delete commit
-git reset id_commit --mixed    --->delete commit and stage
-git reset id_commit --hard     --->delete file and directory
+git checkout -- file_name        ---> back to last commit file(this command working in after stage)
+git revert id_commit             ---> delete effects commit this command not delete commit
+
+git reset HEAD file_name         ---> if file into stage back to workdirectory(delete file of stage)
+git reset --soft id_commit       ---> back to stage and delete logs after, but not change content files self
+git reset --mixed id_commit      ---> back to workdirectory and delete logs after, but not change content files self
+git reset id_commit --hard       ---> back to workdirectory and delete logs and contents before of git and file
 
 
-git push git_link branch_name    --->sending project to repository github
-git pull git_link branch_name    --->received project complete of github
+git push git_link branch_name    ---> sending project to repository github
+git pull git_link branch_name    ---> received project complete of github
 git fetch git_link               ---> received changes project than project exists
 
-git remote add link_name    --->set url for origin
-git remote -v               ---> show url for pull and push
+git remote add link_name         ---> set url for origin
+git remote -v                    ---> show url for pull and push
 
 git clone git_link
 
-git remote rm origin   --->delete remote
-git remote set_url url_new_github_for_change --->change url remote origin
+git remote rm origin                             ---> delete remote
+git remote set_url url_new_github_for_change     ---> change url remote origin
 
-rm -rf .git ---> remove git
+git mv old_name new_name                         ---> rename or move file 
+git mv file_name path/file_name 
+
+
+git rm file_name                                  ---> remove file
+git rm --cached file_name                         ---> canceling following file the of before following 
+rm -rf .git                                       ---> remove git
