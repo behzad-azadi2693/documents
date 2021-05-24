@@ -37,6 +37,7 @@ git stash pop stahs_name         ---> apply and remive stash
  
 git merge branch_name            ---> merge branch to master first go to branche master
 git merge --abort
+git rebase branche_name HEAD~2   ---> merge branche and 2 commit laster with together
 
 
 git diff                         ---> what changed in last commit
