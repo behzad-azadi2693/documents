@@ -1,0 +1,28 @@
+sudo systemctl status nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+sudo systemctl stop nginx
+sudo systemctl reload nginx
+sudo systemctl enable  nginx
+sudo systemctl disable nginx
+
+nginx -h
+nginx -t
+nginx -c /path/file_config_name
+
+----------------------------example1
+events{}                            ---necessary in all config file 
+
+http {                              ---directive http for get request http in browser
+  server{                           ---first my server we can having more server
+    listen 80;                      ---port 80
+    server_name localhost;          ---nmae my server
+    return 200 "hello world";       ---return response
+  }
+  server{
+    listen 8000;
+    server_name 127.0.0.1;
+    return 200 "hello lan";
+  }  
+}
+---------------------------
