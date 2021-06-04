@@ -7,22 +7,33 @@ sudo systemctl enable  nginx
 sudo systemctl disable nginx
 
 nginx -h
-nginx -t
+nginx -t                            ---test
 nginx -c /path/file_config_name
 
 ----------------------------example1
+user user_name;                     ---run with who user
 events{}                            ---necessary in all config file 
 
 http {                              ---directive http for get request http in browser
+  
   server{                           ---first my server we can having more server
     listen 80;                      ---port 80
     server_name localhost;          ---nmae my server
     return 200 "hello world";       ---return response
   }
+  
   server{
     listen 8000;
     server_name 127.0.0.1;
-    return 200 "hello lan";
-  }  
+    root /path/;                   ---get path for write information of there this root for enheritance
+    
+    location / {}
+    
+    location /about {
+      root /path/;
+      index file_name;             ---change index.html
+    
+    }
+  }
 }
 ---------------------------
