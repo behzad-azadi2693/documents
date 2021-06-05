@@ -31,7 +31,9 @@ worker_processes auto;
 
 error_log /var/log/nginx/error.log;
 
-events{}                            ---necessary in all config file 
+events{                      ---necessary in all config file 
+  worker_connections 2048;
+}                            
 
 http {                              ---directive http for get request http in browser
   log_format main '$remote_addr $remote_user $time_local $request '
@@ -88,6 +90,9 @@ http {
     server_name 127.0.0.1;
     location / {
       proxy_pass http://[name]; 
+    }
+    location /images {
+      try_files $uri /images/my_file.*;   ---if in uri not exists my request show my_file.*   
     }
   }  
   
