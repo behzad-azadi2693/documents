@@ -1,10 +1,22 @@
+cat /run/nginx.pid
+
 sudo systemctl status nginx
 sudo systemctl start nginx
-sudo systemctl restart nginx
-sudo systemctl stop nginx
-sudo systemctl reload nginx
+sudo systemctl restart nginx        ---this change pid
+sudo systemctl stop nginx      
+sudo systemctl reload nginx         ---no change pid
 sudo systemctl enable  nginx
 sudo systemctl disable nginx
+---OR---
+nginx -s reload
+nginx -s stop
+nginx -s quit
+nginx -s reopen
+
+cp /dev/null access.log             ---clean file log
+
+main                                ---controlling my webserver
+worker                              ---processing requests
 
 nginx -h
 nginx -t                            ---test
@@ -12,28 +24,91 @@ nginx -c /path/file_config_name
 
 ----------------------------example1
 user user_name;                     ---run with who user
+
+pid /run/nginx.pid
+
+worker_processes auto;
+
+error_log /var/log/nginx/error.log;
+
 events{}                            ---necessary in all config file 
 
 http {                              ---directive http for get request http in browser
+  log_format main '$remote_addr $remote_user $time_local $request '
+             '$status $body_bytes_sent $http_user_agent ';
   
   server{                           ---first my server we can having more server
     listen 80;                      ---port 80
     server_name localhost;          ---nmae my server
     return 200 "hello world";       ---return response
+    include /etc/nginx/mime.types;  ---include type file into config
+    default_type text/plain;
+    gzip on;                        ---compress data
+    keepalive_timeout 30;           ---time for close connection for send data defaul 75s
+    sendfile on;                    ---send big data step step
+    sendfile_maxe_chunk 0;          ---The volume of data sent(0 = Based on speed)
   }
   
   server{
     listen 8000;
     server_name 127.0.0.1;
-    root /path/;                   ---get path for write information of there this root for enheritance
+    root /path/;                    ---get path for write information of there this root for enheritance
+    error_page 404 ... /page.html;  ---error page for nginx 
     
-    location / {}
+    location / {}                   ---inheritance settings default 
+    
+    location /error.html {
+      root /path/;
+    }
     
     location /about {
-      root /path/;
-      index file_name;             ---change index.html
-    
+      root /path/;                  ---in th path research for dir about
+      index file_name;              ---change index.html
+      error_log /var/log/nginx/error_about.log main;
+      access_log /var/log/nginx/access_about.log main;
+      autoindex on;                 ---list file/dir for show in browser if not exist index.html >>>for this state [index NO_EXISTENT_INDEX;]
     }
   }
 }
----------------------------
+---------------------------example2
+user username;
+
+events {}
+
+http {
+  
+  upstream [name] {                ---load sharing
+    server 127.0.0.1:81 weight=3;  ---server one
+    server 127.0.0.1:82 weight=1;  ---sever tow
+    server 127.0.0.1:83 backup;
+  }
+  
+  server {
+    listen 80;
+    server_name 127.0.0.1;
+    location / {
+      proxy_pass http://[name]; 
+    }
+  }  
+  
+  server {                         ---virtual server
+    listen 81;
+    server_name 127.0.0.1;
+    root /path/;
+    location / {}
+  }
+  
+  server {                         ---virtual server
+    listen 82;
+    server_name 127.0.0.1;
+    root /path/
+    location / {}
+  }
+}
+
+
+
+
+
+
+
