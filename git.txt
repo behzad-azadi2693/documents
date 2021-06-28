@@ -73,4 +73,5 @@ git mv file_name path/file_name
 
 git rm file_name                                  ---> remove file
 git rm --cached file_name                         ---> canceling following file the of before following 
+git rm -r --cached path_to_dir                    ---> canceling following directory the of before following 
 rm -rf .git                                       ---> remove git
