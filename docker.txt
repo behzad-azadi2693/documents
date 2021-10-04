@@ -15,6 +15,9 @@ docker
 ---help---
 docker [commend] --help
 
+---upgrade---
+docker-compose up --force-recreate --build -d
+
 
 -----------------------------------IMAGE-----------------------------
 
