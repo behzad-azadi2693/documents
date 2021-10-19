@@ -106,3 +106,37 @@ mongodump
 mongodump -d db_name
 
 mongorestore
+--------------------------PYMONGO-----------------------------
+import pymongo
+
+client = pymongo.MongoClient("mongo://localhost:27017/")
+
+db = client["DB_name"]
+
+dblist = client.list_database_names()
+
+col = db["collection"]
+
+collist = db.list_collection_names()
+
+col.insert_one(my_dict)
+
+col.insert_many(list<dict>)
+
+col.find()
+col.find({},{"_id": 0})
+col.find("field":{"$gt": "<>"} ---> gte,lte,lt,gt
+col.fin_one(query)
+
+clo.find().sort("field":1) --->-1
+
+col.delete_one(query)
+col.delete_many(query)
+col.delete_many({})
+
+col.drop()
+
+col.update_one({"field":{"$rgex":"<>"}, {"$set":{"field":"<>"}) --->$unset
+col.update_many(qury, new_value)
+
+col.find().limit(5)
