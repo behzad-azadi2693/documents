@@ -1,3 +1,7 @@
+mongod --port 27017 --dbpath <path> --logpath <path>
+
+mongo --port
+-------------------------------------------
 use db_name
 
 db.roles()
@@ -15,7 +19,12 @@ db.users.remove({})
 db.users.drop()
 
 show collections
-------------------------------------------
+-------------------------------------------
+db.collection.createIndex({field:1},{unique:true})
+
+db.collection.createIndex({"user.username":1,"user.code_cart":1},{unique:true})
+
+-------------------------------------------
 db.users.insertOne({name:"joe"},...)
 
 db.users.insertMany([{...},{...}])
@@ -26,11 +35,15 @@ db.users.find()
 
 db.users.findOne({name:'joe'})
 
+db.users.findOne({name:{$exists : true}})
+
 db.users.find({name:{$in { ['joe', 'john']}, .... })
 
 db.users.find({$or:[{name:{$in { ['joe', 'john']}, {age:{$gt:20}} ]})
 -------------------------------------------------
 db.users.updateOne({name:'joe'}, {$set:{age:10}})
+
+db.users.updateOne({name:'joe'}, {$unset:{age:""}})
 
 db.users.updateOne({name:'joe'}, {$set:{age:10},{upsert:true}})
 
