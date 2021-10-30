@@ -209,4 +209,5 @@ dockercompose up
 
 
 
-
+docker run -itd --name my_name my_image
+docker exec -it my_container bash
