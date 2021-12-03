@@ -55,6 +55,7 @@ docker container --help
 ----show list----
 docker ps -a       >>>(-l , -n 4, -q , -f {{size .}} , --format "{{.NAMES}} this id:{{.ID}}")
 docker container ls
+watch docker container ls
 
 ----create container----
 docker run [image name/id]
@@ -162,6 +163,10 @@ docker network prune
 
 FROM [image]:latest
 
+ENV PYTHONDONTWRITEBYTECODE 1
+
+ENV PYTHONUNBUFFERED 1
+
 MAINTAINER 'information about making'
 
 #this is comments
@@ -211,3 +216,20 @@ dockercompose up
 
 docker run -itd --name my_name my_image
 docker exec -it my_container bash
+
+
+----docker healthcheck in docker-compose---example for nginx
+healthcheck:
+    test: curl --fail http://localhost || exit 1
+    interval: 30s
+    timeout: 60s
+    start_period: 5s
+    retries: 3
+    
+----docker healthcheck in Dockerfle----example for nginx
+FROM nginx
+HEALTHCHECK --interval=30s /
+            --timeout=60s /
+            --start-period=5s /
+            --retries=3 /
+            CMD curl --fail http://localhost || exit 1
