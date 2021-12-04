@@ -19,7 +19,12 @@ sudo systemctl restart postgresql
 sudo su - postgres
 psql
 
- ---select all---
+---work with docker---
+docker run --name postgres -e POSTGRES_PASSWORD=123456 -d postgres
+
+docker exec -it -u postgres postgres psql
+
+---select all---
 
 SELECT *
 FROM employees;
