@@ -23,6 +23,11 @@ psql
 docker run --name postgres -e POSTGRES_PASSWORD=123456 -d postgres
 
 docker exec -it -u postgres postgres psql
+---or
+docker run --name postgres -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d postgres
+
+psql -U postgres -d postgres -h 127.0.0.1 
+
 
 ---select all---
 
