@@ -22,13 +22,86 @@ psql
 ---work with docker---
 docker run --name postgres -e POSTGRES_PASSWORD=123456 -d postgres
 
-docker exec -it -u postgres postgres psql
+docker exec -it -u username contaunername psql
 ---or
-docker run --name postgres -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d postgres
+docker run --name contaunername -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d dbname
 
-psql -U postgres -d postgres -h 127.0.0.1 
+psql -U username -d dbname -h 127.0.0.1 
 
 
+---ineterminal---
+createdb --help
+
+createuser --help
+
+--- create,drop DB---
+
+CREATE DATABASE dbname WITH OWNER=username TEMPLATE=templatename ....;
+
+
+DROP DATABASE dbname;
+
+---role/user---
+CREATE ROLE name WITH PASSWORD='123456' SUPERUSER LOGIN ....;
+
+DROP ROLE name
+
+---table---
+
+CREATE TABLE me (
+		id Int PRIMARY KEY,
+                user_name varchar(60) UNIQUE,
+                age Int NOT NULL CONSTRAINT ch_age CHECK (age>10),
+                register date,
+                is_admin boolean DEFAULT FALSE,
+                fk varchar(10) UNIQUE,
+                FOREIGN KEY (fk) REFERENCES customers(customer_id),
+                CONSTRAINT usernaem CHECK LENGTH(username)
+                );
+
+
+ALTER TABLE me RENAME username TO firstname
+ALTER TABLE me RENAME TO users;
+
+
+ALTER TABLE users ADD birth_date varchar(300);
+
+
+ALTER TABLE users
+DROP birth_date;
+
+
+ALTER TABLE users
+ALTER COLUMN user_name TYPE varchar(330);
+
+
+CREATE UNIQUE INDEX username_users ON users(user_name);
+
+
+DROP INDEX username_users;
+
+
+---relation---
+---OneToOne
+CREATE TABLE name (
+		category_id INTEGER unique NOT NULL REFRENCES tablename ON DELETE CASCADE ON UPDATE CASCADE,
+	)
+-----OneToMany
+CREATE TABLE name (
+                category_id INTEGER NOT NULL REFRENCES category ON DELETE CASCADE,
+        )
+---ManyToMany
+CREATE TABLE name (
+                category_id INTEGER NOT NULL REFRENCES category ON DELETE CASCADE,
+                tag_id integer NOT NULL REFRENCES tag ON DELETE CASCADE,
+		time created_at TIMESTAMPTZ DEFAULT Now(),
+        )
+	
+CASCADE
+NO ACTION
+SET NULL
+
+	
 ---select all---
 
 SELECT *
@@ -362,50 +435,6 @@ FROM customers
 WHERE coutry='Germany';
 
 
-
---- create,drop DB---
-
-CREATE DATABASE joe;
-
-
-DROP DATABASE joe;
-
-
-
----table---
-
-CREATE TABLE me (
-		id Int PRIMARY KEY,
-                user_name varchar(60) UNIQUE,
-                age Int NOT NULL CONSTRAINT ch_age CHECK (age>10),
-                register date,
-                is_admin boolean DEFAULT FALSE,
-                fk varchar(10) UNIQUE,
-                FOREIGN KEY (fk) REFERENCES customers(customer_id),
-                CONSTRAINT usernaem CHECK LENGTH(username)
-                );
-
-
-ALTER TABLE me RENAME username TO firstname
-ALTER TABLE me RENAME TO users;
-
-
-ALTER TABLE users ADD birth_date varchar(300);
-
-
-ALTER TABLE users
-DROP birth_date;
-
-
-ALTER TABLE users
-ALTER COLUMN user_name TYPE varchar(330);
-
-
-CREATE UNIQUE INDEX username_users ON users(user_name);
-
-
-DROP INDEX username_users;
-￼
 
 ----postgres in django----
 >>> sudo su - postgres
