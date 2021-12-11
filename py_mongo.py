@@ -1,16 +1,84 @@
+---install mongo on ubuntu---
+
+sudo apt update
+sudo apt install -y mongodb
+
+sudo systemctl status mongodb
+or service mongodb status
+
+sudo systemctl start mongod
+or service mongodb start
+
+sudo systemctl stop mongod  or
+service mongodb stop
+
+
+
+---docker---
+
+#pull of dockerhost
+docker pull mongo
+
+#run container mongo
+docker run --name mongo -p 27017:27017 -d mongo
+
+#mongoshel
+docker exec -it mongo mongo
+>>>mongo
+
+
+---install driver pymongo---
+python -m pip install pymongo
+python -m pip install --upgrade pymongo
+sudo apt-get install build-essential python-dev
+
+
+
+-------------------------------START-------------------------------
+
+#include driver
 import pymongo
 
-#---connect---
-my_client = pymongo.MongoClient("mongodb://localhost:27017/") #create connect with mongodb
 
 
-#----create db and collection----
-my_db = my_client['product'] #create new (DB)
-db_list = my_client.list_database_names() #list of (DBs) exists in mongo
-if 'product' in db_list: #checking (DB) is exists
+#---connection---
+
+#create connect with mongodb
+connection = pymongo.MongoClient("mongodb://localhost:27017/")
+connection = pymongo.MongoClient('localhost', 27017)
+>>>mongo
+
+
+
+#----document(DB)----
+
+#create new document(DB)
+create_document = connection['shop']
+>>>use shop
+
+#list document(DB)
+list_document = connection.list_database_names()
+>>>show 
+
+#number document(DB)
+print(len(list_document))
+>>>db.getMongo().getDBNames().length
+
+#check exist document(DB)
+if 'product' in list_db:
     print('The database exists')
+>>>db.getMongo().getDBNames().indexof("shop")
 
+#remove document(DB)
+connection.drop_database('shop')
+>>>db.dropDatabase()
+
+
+
+---collection---
 my_col = my_db['customers'] #create collection(tabel)
+>>>db.CreateCollection('products')
+
 col_list = my_db.list_collection_names() #get all list of collections(table)
 if 'customers' in col_list: #check for collection is exists
     print('The collection exists')
