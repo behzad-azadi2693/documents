@@ -19,6 +19,8 @@ docker run --name mongo -p 27017:27017 -d mongo
 
 docker exec -it mongo bash
 
+docker exec -it mongo mongo
+
 -------------------------------------------
 use db_name
 
