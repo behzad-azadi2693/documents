@@ -1,6 +1,24 @@
+sudo apt update
+sudo apt install -y mongodb
+
+sudo systemctl status mongodb
+or service mongodb status
+
+sudo systemctl start mongod
+or service mongodb start
+
+sudo systemctl stop mongod  or
+service mongodb stop
 mongod --port 27017 --dbpath <path> --logpath <path>
 
 mongo --port
+
+
+---docker---
+docker run --name mongo -p 27017:27017 -d mongo
+
+docker exec -it mongo bash
+
 -------------------------------------------
 use db_name
 
