@@ -75,6 +75,20 @@ connection.drop_database('shop')
 
 
 
+---role---
+#list user
+>>>show users
+>>>get.getUsers()
+
+#create user
+>>>db.createUser({user:"admin",pwd:"admin",roles:[{role:"userAdminAnyDatabase", db:"admin"}]})
+
+#delete user
+>>>db.removeUsers("admin")
+>>>db.dropUser("admin")
+
+
+
 ---collection---
 my_col = my_db['customers'] #create collection(tabel)
 >>>db.CreateCollection('products')
