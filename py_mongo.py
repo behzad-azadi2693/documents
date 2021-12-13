@@ -50,7 +50,7 @@ connection = pymongo.MongoClient('localhost', 27017)
 
 
 
-#----document(DB)----
+----document(DB)----
 
 #create new document(DB)
 create_document = connection['shop']
@@ -58,7 +58,8 @@ create_document = connection['shop']
 
 #list document(DB)
 list_document = connection.list_database_names()
->>>show 
+>>>show dbs
+>>>db.getMongo().getDBNames()
 
 #number document(DB)
 print(len(list_document))
@@ -75,7 +76,7 @@ connection.drop_database('shop')
 
 
 
----role---
+---role and user---
 #list user
 >>>show users
 >>>get.getUsers()
@@ -89,13 +90,25 @@ connection.drop_database('shop')
 
 
 
----collection---
-my_col = my_db['customers'] #create collection(tabel)
+---collection(table)---
+
+#create collections(table)
+create_collection = create_document['products'] 
 >>>db.CreateCollection('products')
 
-col_list = my_db.list_collection_names() #get all list of collections(table)
-if 'customers' in col_list: #check for collection is exists
+#list collections(table)
+collection_list = create_collection.list_collection_names()
+>>>show collections
+>>>db.getCollectionNames()
+
+#check for collection is exists
+if 'products' in collection_list: 
     print('The collection exists')
+    
+#remove collection(table)
+>>>create_collection.drop()
+>>>db.products.drop()
+
 
 
 #----insert-----
