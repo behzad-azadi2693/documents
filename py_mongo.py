@@ -109,40 +109,43 @@ if 'products' in collection_list:
 >>>create_collection.drop()
 >>>db.products.drop()
 
-
-
-#----insert-----
-my_dict = {'name':'joe', 'address':'USA'} #we information
-one_data = my_col.insert_one(my_dict) #inpurt data in collection or create document(record)
+#insertOne data
+my_dict = {'name':'samsung', 'price':10000}
+one_data = collection.insert_one(my_dict) 
 print(f'one_data output={one_data.inserted_id}') #get id document(record)
+>>>db.products.insertOne({'name':'samsung', 'price':10000})
 
-
-my_list = [
+#insertMany data
+list_data = [
     {'name': 'joey', 'address': 'germany'},
     {'name': 'jack', 'address': 'canada'},
     {'name': 'john', 'address': 'france'}    
-]#we information for many
-many_data = my_col.insert_many(my_list) #inpurt data in collection or create document(record)
+]
+many_data = collection.insert_many(list_data) #inpurt data in collection or create document(record)
 print(f'many_data output={many_data.inserted_ids}')#get id documents(records)
+>>>db.products.insertMany([{...},{....},{....}])
 
-
-#----searching , queery----
-sample_query = {'address':'USA'}
-advance_query = {'address':{'$gt':'s'}}
-regular_query = {'address':{'$regex':'^S'}}
+#searching(find) , query
+sample_query = {'nmae':'samsung'}
+advance_query = {'price':{'$gt':10000}}
+regular_query = {'name':{'$regex':'^S'}}
 
 findone = my_col.find_one() #get one data in collection
 print(f'findone output={findone}')
+>>>db.products.findOne()
 
 for data in my_col.find(): #get many data in collection
-    print(f'manydat={data}')
-for data in my_col.find({}, {'_id':0,'name':1,'address':1}): #control output fro show wich information 0=False 1=True
-    print(data)
+    print(f'manydata={data}')
+>>>db.products.find()
 
-my_doc = my_col.find(advance_equery).sort('name', -1).limit(5) #-1=descending and 1=ascending
+for data in my_col.find({}, {'_id':0,'name':1,'address':1}): #control output for show wich information 0=False 1=True
+    print(data)
+>>>db.products.find({},{'_id':0, 'name':1,'address':1})
+
+my_doc = my_col.find(advance_equery).sort('_id', -1).limit(5) #-1=descending and 1=ascending
 for data in my_doc:
     print(f'my_doc={data}')
-
+>>>db.products.find({'price':{'$gt:9000'}).limit(5).sort({'_id':-1})
 
 #----delete----
 my_col.delete_one(sample_query)
