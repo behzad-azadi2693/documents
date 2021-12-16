@@ -147,24 +147,27 @@ for data in my_doc:
     print(f'my_doc={data}')
 >>>db.products.find({'price':{'$gt:9000'}).limit(5).sort({'_id':-1})
 
-#----delete----
+#delete
 my_col.delete_one(sample_query)
+>>>db.products.deleteOne(query)
 
 delete = my_col.delete_many(regular_query)
 print(f'number of delete={delete.deleted_count}')
-
+>>>db.products.deleteMany(query)
+                     
 delete_all_col = my_col.delete_many({})
 print(f'delete all collection={delete_all_col.deleted_count}')
+>>>db.collection.remove({})
 
-my_col.drop() #delete collection(table)
-
-
-#----updating----
-one_query = {'address':'canada'}
-new_value = {'$set':{'address':'UKA'}}
+#updating
+one_query = {'ame':'apple'}
+new_value = {'$set':{'price':12000}}
 my_col.update_one(one_query, new_value)
-
-many_query = {'address':{'$regex':'^S'}}
-new_values = {'$set':{'name':'minne'}}
+>>>db.products.updateOne(query, value)
+                     
+many_query = {'name':{'$regex':'^S'}}
+new_values = {'$set':{'name':'LG'}}
 output = my_col.update_many(many_query, new_values)
 print(f'number data changed(updating)={output.modified_count}')
+>>>db.products.updateMany(query, value)
+
