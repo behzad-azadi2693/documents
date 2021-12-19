@@ -50,27 +50,27 @@ connection = pymongo.MongoClient('localhost', 27017)
 
 
 
-----document(DB)----
+----database(DB)----
 
 #create new document(DB)
-create_document = connection['shop']
+create_db = connection['shop']
 >>>use shop
 
 #list document(DB)
-list_document = connection.list_database_names()
+list_db = connection.list_database_names()
 >>>show dbs
 >>>db.getMongo().getDBNames()
 
-#number document(DB)
-print(len(list_document))
+#number database(DB)
+print(len(list_db))
 >>>db.getMongo().getDBNames().length
 
-#check exist document(DB)
+#check exist database(DB)
 if 'product' in list_db:
     print('The database exists')
 >>>db.getMongo().getDBNames().indexof("shop")
 
-#remove document(DB)
+#remove database(DB)
 connection.drop_database('shop')
 >>>db.dropDatabase()
 
@@ -171,3 +171,23 @@ output = my_col.update_many(many_query, new_values)
 print(f'number data changed(updating)={output.modified_count}')
 >>>db.products.updateMany(query, value)
 
+                     
+                     
+---index text search---
+         
+#index
+index = collection.create_index([("field_to_index", 1),("second_field_indexed", -1)])    
+print ("index response:", resp)
+>>>db.product.createIndex()                
+
+#text search                     
+collection.create_index([('field_i_want_to_index', pymongo.TEXT)], name='column_name', default_language='english')
+>>>db.products.createIndex({column_name:"text"})            
+                     
+                     
+                     
+----
+                     
+                     
+                     
+                     
