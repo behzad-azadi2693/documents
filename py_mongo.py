@@ -173,20 +173,39 @@ print(f'number data changed(updating)={output.modified_count}')
 
                      
                      
----index text search---
+---index---
          
 #index
-index = collection.create_index([("field_to_index", 1),("second_field_indexed", -1)])    
+index = collection.create_index([("first_field-index", 1),("second_field_index", -1)]) 
 print ("index response:", resp)
->>>db.product.createIndex()                
+>>>db.product.createIndex({"first-fieeld-index":1, "second-field-index":-1})
 
-#text search                     
+#get all index
+collection.index_information()     
+>>>db.products.getIndexes()
+                     
+#remove index one
+connection.collection.reindex("first-field-index")
+>>>db.products.dropIndex("first-field-index")
+
+#remove index many
+connection.collection.drop_indexes({"first-fieeld-index":1, "second-field-index":1})
+>>>db.products.dropIndexes({"first-fieeld-index":1, "second-field-index":1})
+                     
+                     
+                     
+---search---
+#full text search                     
 collection.create_index([('field_i_want_to_index', pymongo.TEXT)], name='column_name', default_language='english')
 >>>db.products.createIndex({column_name:"text"})            
+
+#key word search
+collection.inseart_one({'name':'new','price':3000, 'key_search':["one-key","two-key"]}
+collection.create_index(["key_search":1])
                      
+#elasticsearch
                      
-                     
-----
+---relation---
                      
                      
                      
