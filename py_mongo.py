@@ -93,7 +93,7 @@ connection.drop_database('shop')
 ---collection(table)---
 
 #create collections(table)
-create_collection = create_document['products'] 
+create_collection = create_db['products'] 
 >>>db.CreateCollection('products')
 
 #list collections(table)
@@ -203,10 +203,26 @@ collection.create_index([('field_i_want_to_index', pymongo.TEXT)], name='column_
 collection.inseart_one({'name':'new','price':3000, 'key_search':["one-key","two-key"]}
 collection.create_index(["key_search":1])
                      
-#elasticsearch
-                     
+
+                       
 ---relation---
-                     
-                     
+collection = create_db['user']
+collection_address = create_db['address']
+    
+#one to one
+collection.insert_one({'name':'joe','address':{'city':'sanandaj','streeate':'one','phone':09120000000}})
+                       
+#one to many
+collection_address.insert_many({'user_id':'joe', 'address':{'city':'sanandaj','streeate':'one','phone':09120000000},
+                               'user_id':'joe', {'address':{'city':'sanandaj','streeate':'one','phone':09120000000}
+                              })
+ collection.insert_one({'name':'joe','address':[
+                                                {'city':'sanandaj','streeate':'one','phone':09120000000},
+                                                {'city':'sanandaj','streeate':'one','phone':09120000000}
+                                               ]
+                      })
+                                
+#many to many
+collection.insert_one({'name':'joe', 'address':['address_id_1','address_id_2']})
                      
                      
