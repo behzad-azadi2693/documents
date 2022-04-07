@@ -132,6 +132,7 @@ docker volume inspect [volume name]
 
 ---remove volume---
 docker volume rm [volume name]
+docker volume rm $(docker volume ls)
 
 ---connect container to  volume---
 -v [volume name]:[name WORKDIR]
@@ -155,6 +156,7 @@ docker network connect [network name] [container name/id]
 docker network disconnect 
 docker network inspect [network name]
 docker network rm [network name]
+docker network rm $(docker network ls)
 docker network prune 
 
 
