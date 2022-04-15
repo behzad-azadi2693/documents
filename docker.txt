@@ -192,6 +192,7 @@ docker build -f [paht_Dockerfile] -t [name]:[version]
 docker run [image]
 
 ----------------------------------DOCKERCOMPOSE---------------------
+export $(cat .env | xargs)
 
 ----version---
 docker-compose --version
