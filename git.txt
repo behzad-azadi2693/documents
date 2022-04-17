@@ -92,3 +92,13 @@ git bisect bad
 
 git blame file_name -L8.    --->show ordinray change this line of file
 git blame file_name -L8,9.  --->show ordinery change of this line to these line from file
+
+
+
+gpg --gen-key
+gpg --list-keys
+git config --global user.signingkey
+git config --global user.signingkey pub_key
+git tag -S tag_name -m "messages"
+git commit -S -m "messages"
+
