@@ -14,6 +14,7 @@ git log                          ---> show logs commits
 git log --oneline      
 git log --graph 
 git log --stat
+git show log_id
 
 
 git branch ...      		           ---> create branche 
@@ -75,3 +76,19 @@ git rm file_name                                  ---> remove file
 git rm --cached file_name                         ---> canceling following file the of before following 
 git rm -r --cached path_to_dir                    ---> canceling following directory the of before following 
 rm -rf .git                                       ---> remove git
+
+
+git tag                           --->show all tag
+git show tag_name                 --->show this tag information
+git tag -a tag_name -m "messages" --->create tag_name and added to there
+git tag -a tag_name -m log_id.    --->create tag_name and added to old log_id
+
+
+git bisect start                  --->search binery for error
+git bisect bad log_id
+git bisect good
+git bisect bad
+
+
+git blame file_name -L8.    --->show ordinray change this line of file
+git blame file_name -L8,9.  --->show ordinery change of this line to these line from file
