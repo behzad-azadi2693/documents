@@ -18,6 +18,10 @@ docker [commend] --help
 ---upgrade---
 docker-compose up --force-recreate --build -d
 
+---stats---
+docker stats
+docker stats <container_name>
+
 
 -----------------------------------IMAGE-----------------------------
 
@@ -91,7 +95,8 @@ docker port [container name/id]
 docker exec -it [container name/id] [commend]
 
 docker logs [container]
-docker logs -f [container]   >>>show in line to line
+docker logs -f [container]   >>>show in line to line(live)
+docker logs --tail <number> <container_name> 
 
 docker diff [container]
 
