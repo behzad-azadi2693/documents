@@ -22,11 +22,19 @@ psql
 ---work with docker---
 docker run --name postgres -e POSTGRES_PASSWORD=123456 -d postgres
 
-docker exec -it -u username contaunername psql
+docker exec -it -u username containername psql
 ---or
-docker run --name contaunername -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d dbname
+docker run --name containername -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d dbname
 
 psql -U username -d dbname -h 127.0.0.1 
+
+
+---docker-compose
+docker exec -it containername bashe
+psql -d mydb -U myuser -W
+postgres=# \l
+postgres=# \c database_name
+postgres=# \dt
 
 
 ---ineterminal---
