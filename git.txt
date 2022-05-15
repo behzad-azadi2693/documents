@@ -82,6 +82,9 @@ git tag                           --->show all tag
 git show tag_name                 --->show this tag information
 git tag -a tag_name -m "messages" --->create tag_name and added to there
 git tag -a tag_name -m log_id.    --->create tag_name and added to old log_id
+git tag -S tag_name -m "messages"
+
+git commit -S -m "messages"
 
 
 git bisect start                  --->search binery for error
@@ -99,6 +102,5 @@ gpg --gen-key
 gpg --list-keys
 git config --global user.signingkey
 git config --global user.signingkey pub_key
-git tag -S tag_name -m "messages"
-git commit -S -m "messages"
+
 
