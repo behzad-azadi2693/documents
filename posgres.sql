@@ -28,6 +28,9 @@ docker run --name containername -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d dbna
 
 psql -U username -d dbname -h 127.0.0.1 
 
+---or
+createdb -U postgres pythonspatial
+psql -U postgres -d pythonspatial -c "CREATE EXTENSION postgis;"
 
 ---docker-compose
 docker exec -it containername bashe
