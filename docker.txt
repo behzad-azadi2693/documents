@@ -270,4 +270,4 @@ docker run -d --name gitlab-runner --restart always \
     
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'  <container_id>
 
-docker run --rm -it -v gitlab-runner-config:/etc-gitlabrunner gitlab/gitlab-runner register
+docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner register
