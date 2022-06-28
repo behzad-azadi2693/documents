@@ -104,3 +104,7 @@ git config --global user.signingkey
 git config --global user.signingkey pub_key
 
 
+
+git config pull.rebase false  # merge (the default strategy)
+git config pull.rebase true   # rebase
+git config pull.ff only       # fast-forward only
