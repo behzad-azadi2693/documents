@@ -38,6 +38,8 @@ psql -d mydb -U myuser -W
 postgres=# \l
 postgres=# \c database_name
 postgres=# \dt
+postgres=# \dn
+
 
 
 ---ineterminal---
