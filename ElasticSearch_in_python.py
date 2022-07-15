@@ -6,17 +6,34 @@ pip install elasticsearch[async]
 ==================================================in python========================================
 from elasticsearch import Elasticsearch
 
+#connect
 es = Elasticsearch('http://localhost:9200')
 
+#create index in elastic this need insdex and id, this lie db in sql, not concept index in sql, if run again update date
+resp = es.index(index='<name>', id=<id>, document=<dictionary python>)  #if dont use id elastic define automate objectid
+print(resp)                #show information
+print(resp['result'])
 
 
+#get data information of elastic
+resp = es.get(index='<name>', id=1)   #get information of index with id in elastic
+print(resp['_source'])
 
 
+#search in elastic
+resp = es.search(index='<name>', query={'match_all': {})
+print(resp)                       #return all information about index, data
+print(resp['hits']['hits'])       #return all data and information
+for hit in resp['hits'][hits']:
+    print(hit)                    #return dittionary python of data
 
 
-
-
-
+#update document in elastic
+resp = es.update(index='<name>', id=<id>, document=<dictionary python>
+print(resp['result'])
+                 
+#delete document                
+es.delete(index='<name>', id=<id>)
 
 
 
@@ -33,7 +50,6 @@ services:
     image: elasticsearch:8.2.2
     environment:
       - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
       - xpack.security.enabled=false
     volumes:
       - es_data:/usr/share/elasticsearch/data
