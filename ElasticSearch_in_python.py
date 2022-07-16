@@ -9,10 +9,13 @@ from elasticsearch import Elasticsearch
 #connect
 es = Elasticsearch('http://localhost:9200')
 
+
+
 #create index in elastic this need insdex and id, this lie db in sql, not concept index in sql, if run again update date
 resp = es.index(index='<name>', id=<id>, document=<dictionary python>)  #if dont use id elastic define automate objectid
 print(resp)                #show information
 print(resp['result'])
+
 
 
 #get data information of elastic
@@ -20,28 +23,69 @@ resp = es.get(index='<name>', id=1)   #get information of index with id in elast
 print(resp['_source'])
 
 
+
+#update document in elastic
+resp = es.update(index='<name>', id=<id>, document=<dictionary python>
+print(resp['result'])
+
+                 
+                 
+#delete document                
+es.delete(index='<name>', id=<id>)
+                 
+              
+                 
 #search in elastic
 resp = es.search(index='<name>', query={'match_all': {})
 print(resp)                       #return all information about index, data
 print(resp['hits']['hits'])       #return all data and information
 for hit in resp['hits'][hits']:
-    print(hit)                    #return dittionary python of data
+print(hit)                    #return dittionary python of data
+
+                        
+
+#make tree search and searching all word
+resp = es.search(index="<name>", query={"match": {'<field>':'<text>'}})
+resp = es.search(index="<name>", query={"match": {'<field>':{'query':'<text>', 'operator':'or'}}) #execpt for prepositions, default operator and
+print(resp['hits']['hits'])
 
 
-#update document in elastic
-resp = es.update(index='<name>', id=<id>, document=<dictionary python>
-print(resp['result'])
-                 
-#delete document                
-es.delete(index='<name>', id=<id>)
+#searching fuzzi for text with Typographical mistakes
+resp = es.search(index="one", query={"match": {'<field>':{'query':'<text>', 'fuzziness':'AUTO'}}})
+print(resp['hits']['hits'])
+                             
+                                        
+                                        
+#make tree search and searching all word in multi fields in degre important
+resp = es.search(index="<name>", query={"multi_match": {'query':'<text>', 'fields':['author^3','text']}})
+print(resp['hits']['hits'])
+
+                                        
+
+#limit number search
+resp = es.search(index='<name>', quesry={'match_all':{}}, size=<number limit>)
+print(len(resp.['hits']['hits']))
+print(resp['hits']['hits'])
+
+                                        
+      
+#searching for text in all fields in index
+resp = es.search(index='<name>', query={'query_string': {'query':'<text>'}})   
+                        # {'query':('<text1>' or '<text2>')}
+                        # {'query':('<text1>' and '<text2>')}
+print(resp['hits']['hits'])
 
 
 
+#searching for field non-textual and phrase {'value':'this phrase'}
+resp = es.search(index="one", query={'term':{'<fiield>':{'value':'<value>', 'boost':1.0}}})
+print(resp['hits']['hits'])
 
 
 
-
-
+#searching for text in specifices fields in index
+resp = es.search(index="<name>", query={"query_string": {'query':'<text>' , 'fields':['<field name>']}})
+print(resp['hits']['hits'])
 
 ==================================================cluster sngle node========================================
 version: "3.9"
