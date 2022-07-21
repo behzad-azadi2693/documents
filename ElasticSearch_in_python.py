@@ -92,6 +92,45 @@ print(resp['hits']['hits'])
 resp = es.search(index="<name>", query={"query_string": {'query':'<text>' , 'fields':['<field name>']}})
 print(resp['hits']['hits'])
 
+
+
+#check data exists in index and use in query
+es.exists(index='<name>', id = domain)
+
+
+
+'''
+in elasticsearch must is equivalent AND, should is equivalent OR, must_not is equivalent NOT
+in every of bool command just can once use of boolean character
+'''
+GET  /movies/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "bool": {
+          "should": [
+            {
+              "match": {
+                "title": "ford"
+              }
+            },
+            {
+              "match": {
+                "title": "kill"
+              }
+            }
+          ]
+        }
+      },
+      "must_not": {
+        "match": {
+          "genres": "Mystery"
+        }
+      }
+    }
+  }
+}
 ==================================================cluster sngle node========================================
 version: "3.9"
 services:
