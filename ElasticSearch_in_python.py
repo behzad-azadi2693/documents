@@ -77,6 +77,11 @@ print(resp['hits']['hits'])
 
 
 
+#check health elasticsearch 
+print(es.cluster.health())
+
+
+
 #searching for field non-textual and phrase {'value':'this phrase'}
 resp = es.search(index="one", query={'term':{'<fiield>':{'value':'<value>', 'boost':1.0}}})
 print(resp['hits']['hits'])
