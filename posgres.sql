@@ -36,10 +36,11 @@ psql -U postgres -d pythonspatial -c "CREATE EXTENSION postgis;"
 ---docker-compose
 docker exec -it containername bashe
 psql -d mydb -U myuser -W
-postgres=# \l
+postgres=# \l \l+ -->information about db and mor information
 postgres=# \c database_name
-postgres=# \dt
+postgres=# \dt -->all table in db
 postgres=# \dn
+postgres=# \d+ <table name> -->all fields in table
 
 
 
