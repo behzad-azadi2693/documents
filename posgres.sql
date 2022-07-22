@@ -1,3 +1,4 @@
+https://www.google.com/amp/s/www.geeksforgeeks.org/postgresql-tutorial/amp/
 
 WORK ON northwind
 
