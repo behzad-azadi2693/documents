@@ -472,6 +472,12 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
 ---show DB---
 \l
 
+---show all table---
+\dt
+
+---show field of table---
+\d+ table_name
+
 ---show,delete user---
 \du
 \du+
