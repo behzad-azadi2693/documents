@@ -17,6 +17,7 @@ docker [commend] --help
 
 ---upgrade---
 docker-compose up --force-recreate --build -d
+docker-compose up --build
 
 ---stats---
 docker stats
