@@ -272,3 +272,6 @@ docker run -d --name gitlab-runner --restart always \
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'  <container_id>
 
 docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner register
+
+link for restore backup to docker container:
+https://davejansen.com/how-to-dump-and-restore-a-postgresql-database-from-a-docker-container/
