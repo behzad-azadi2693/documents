@@ -1,0 +1,14 @@
+برای تغییر پورت اتصال به سرور گتفیست مقدار پورت مربوط رو در مسیر زیر تغییر داد 
+nano /etc/ssh/ssh_config
+        line port 22
+systemctl restart sshd
+ufw allow <new port>/tcp
+ufw allow 80
+ufw enable
+ufw status
+ufw status numbered
+ufw delete <a numbered>
+-------------------------------------------------------------------------------
+برای ردگیری کامل یک دامنه از دستور زیر استفاده کنید
+dig domain_name +trce
+--------------------------------------------------------------------------------
