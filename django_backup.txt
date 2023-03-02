@@ -1,0 +1,29 @@
+<-------- clean DataBase ---------->
+python manage.py flush
+
+
+<------------ backup for all model ------------->
+python django_project/manage.py dumpdata > db.json
+python django_project/manage.py dumpdata --indent 4 > db.json
+
+
+<---------------- for backup just app --------------->
+python django_project/manage.py dumpdata [app_label] > db.json 
+python django_project/manage.py dumpdata --indent 4 [app_label] > db.json
+
+
+<------------ for backup of just model --------------->
+python django_project/manage.py dumpdata --indent 4 [app_label].[model_name] > db.json
+
+
+<---------- --exlude for FK in model ------------>
+python django_project/manage.py dumpdata --indent 4 --exclude [app_label].[model_name] [app_label].[model_name] > db.json
+
+
+<----------- --format for backup with yaml file dependency[pip install pyyaml] ------------->
+python django_project/manage.py dumpdata  --format yaml > db.yaml
+
+
+
+<-------------- load backup to DataBase -------------->
+python manage.py loaddata db.json
